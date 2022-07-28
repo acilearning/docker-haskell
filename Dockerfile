@@ -9,12 +9,19 @@ RUN \
   apt-get update; \
   env DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --no-install-recommends \
     ca-certificates \
-    curl \
     clang \
+    curl \
+    git \
+    inotify-tools \
     libgmp-dev \
+    liblzma-dev \
     libnuma-dev \
+    libpq-dev \
     llvm-dev \
     make \
+    nano \
+    netbase \
+    ssh-client \
     sudo \
     zlib1g-dev; \
   rm --recursive /var/lib/apt/lists/*
@@ -31,8 +38,8 @@ RUN \
 
 USER "$USER_NAME"
 WORKDIR "/home/$USER_NAME"
-RUN mkdir --parents ~/.cabal/bin ~/.ghcup/bin
-ENV PATH="/home/$USER_NAME/.cabal/bin:/home/$USER_NAME/.ghcup/bin:$PATH"
+RUN mkdir --parents ~/.cabal/bin ~/.cache ~/.ghcup/bin ~/.local/bin
+ENV PATH="/home/$USER_NAME/.cabal/bin:/home/$USER_NAME/.local/bin:/home/$USER_NAME/.ghcup/bin:$PATH"
 
 # Install GHCup.
 
@@ -59,6 +66,14 @@ RUN \
   ghcup install cabal "$CABAL_VERSION" --set; \
   cabal --version
 
+# Install Stack.
+
+ARG STACK_VERSION=2.7.5
+RUN \
+  set -o errexit -o xtrace; \
+  ghcup install stack "$STACK_VERSION" --set; \
+  stack --version
+
 # Install HLS.
 
 ARG HLS_VERSION=1.7.0.0
@@ -76,5 +91,22 @@ RUN \
   sudo chown "$USER_NAME" "$CABAL_STORE"; \
   sudo chgrp sudo "$CABAL_STORE"; \
   cabal user-config init --augment "store-dir: $CABAL_STORE"
-VOLUME "/cabal-store"
+
+# Configure Stack.
+ARG STACK_ROOT=/stack-root
+RUN \
+  set -o errexit -o xtrace; \
+  sudo mkdir --mode 0775 --parents "$STACK_ROOT"; \
+  sudo chown "$USER_NAME" "$STACK_ROOT"; \
+  sudo chgrp sudo "$STACK_ROOT"; \
+  stack config set install-ghc --global false; \
+  stack config set system-ghc --global true
+ENV STACK_ROOT="$STACK_ROOT"
+
+# Configure volumes.
+
 VOLUME "/home/$USER_NAME/.cabal"
+VOLUME "/home/$USER_NAME/.cache"
+VOLUME "/home/$USER_NAME/.stack"
+VOLUME "$CABAL_STORE"
+VOLUME "$STACK_ROOT"
