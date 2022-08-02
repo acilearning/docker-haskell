@@ -43,7 +43,7 @@ ENV PATH="/home/$USER_NAME/.cabal/bin:/home/$USER_NAME/.local/bin:/home/$USER_NA
 
 # Install GHCup.
 
-ARG GHCUP_VERSION=0.1.17.8
+ARG GHCUP_VERSION=0.1.18.0
 RUN \
   set -o errexit -o xtrace; \
   curl --output ~/.ghcup/bin/ghcup "https://downloads.haskell.org/~ghcup/$GHCUP_VERSION/$( uname --machine )-linux-ghcup-$GHCUP_VERSION"; \
@@ -93,6 +93,7 @@ RUN \
   cabal user-config init --augment "store-dir: $CABAL_STORE"
 
 # Configure Stack.
+
 ARG STACK_ROOT=/stack-root
 RUN \
   set -o errexit -o xtrace; \
