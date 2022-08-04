@@ -56,6 +56,7 @@ ARG GHC_VERSION=9.0.2
 RUN \
   set -o errexit -o xtrace; \
   ghcup install ghc "$GHC_VERSION" --set; \
+  ghcup gc --profiling-libs --share-dir; \
   ghc --version
 
 # Install Cabal.
