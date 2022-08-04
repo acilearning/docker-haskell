@@ -67,6 +67,23 @@ RUN \
   ghcup install cabal "$CABAL_VERSION" --set; \
   cabal --version
 
+# Install Stack.
+
+ARG STACK_VERSION=2.7.5
+RUN \
+  set -o errexit -o xtrace; \
+  ghcup install stack "$STACK_VERSION" --set; \
+  stack --version
+
+# Install HLS.
+
+ARG HLS_VERSION=1.7.0.0
+RUN \
+  set -o errexit -o xtrace; \
+  ghcup install hls "$HLS_VERSION" --set; \
+  ghcup gc --hls-no-ghc; \
+  haskell-language-server-wrapper --version
+
 # Configure Cabal.
 
 ARG CABAL_STORE=/cabal-store
@@ -77,7 +94,22 @@ RUN \
   sudo chgrp sudo "$CABAL_STORE"; \
   cabal user-config init --augment "store-dir: $CABAL_STORE"
 
+# Configure Stack.
+
+ARG STACK_ROOT=/stack-root
+RUN \
+  set -o errexit -o xtrace; \
+  sudo mkdir --mode 0775 --parents "$STACK_ROOT"; \
+  sudo chown "$USER_NAME" "$STACK_ROOT"; \
+  sudo chgrp sudo "$STACK_ROOT"; \
+  stack config set install-ghc --global false; \
+  stack config set system-ghc --global true
+ENV STACK_ROOT="$STACK_ROOT"
+
 # Configure volumes.
 
 VOLUME "/home/$USER_NAME/.cabal"
+VOLUME "/home/$USER_NAME/.cache"
+VOLUME "/home/$USER_NAME/.stack"
 VOLUME "$CABAL_STORE"
+VOLUME "$STACK_ROOT"
