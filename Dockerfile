@@ -56,6 +56,7 @@ ARG GHC_VERSION=9.0.2
 RUN \
   set -o errexit -o xtrace; \
   ghcup install ghc "$GHC_VERSION" --set; \
+  ghcup gc --profiling-libs --share-dir; \
   ghc --version
 
 # Install Cabal.
@@ -80,6 +81,7 @@ ARG HLS_VERSION=1.7.0.0
 RUN \
   set -o errexit -o xtrace; \
   ghcup install hls "$HLS_VERSION" --set; \
+  ghcup gc --hls-no-ghc; \
   haskell-language-server-wrapper --version
 
 # Configure Cabal.
