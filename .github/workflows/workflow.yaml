@@ -2,7 +2,11 @@ name: Workflow
 on: push
 jobs:
   docker:
-    name: Docker
+    strategy:
+      matrix:
+        ghc:
+          - 9.0.2
+    name: Docker with GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -13,7 +17,9 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           flavor: latest=false
-          tags: type=sha,format=long
+          tags: |
+            type=sha,format=long,prefix=${{ matrix.ghc }}-
+            type=raw,value=${{ matrix.ghc }},enable={{ is_default_branch }}
       - uses: docker/login-action@v2
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
@@ -21,6 +27,7 @@ jobs:
           username: ${{ github.actor }}
       - uses: docker/build-push-action@v3
         with:
+          build-args: GHC_VERSION=${{ matrix.ghc }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           labels: ${{ steps.meta.outputs.labels }}
