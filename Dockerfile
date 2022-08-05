@@ -39,7 +39,7 @@ RUN \
 USER "$USER_NAME"
 WORKDIR "/home/$USER_NAME"
 RUN mkdir --parents --verbose ~/.cabal/bin ~/.cache ~/.ghcup/bin ~/.local/bin
-ENV PATH="/home/$USER_NAME/.cabal/bin:/home/$USER_NAME/.local/bin:/home/$USER_NAME/.ghcup/bin:$PATH"
+ENV PATH="/home/$USER_NAME/.local/bin:/home/$USER_NAME/.cabal/bin:/home/$USER_NAME/.ghcup/bin:$PATH"
 
 # Install GHCup.
 
