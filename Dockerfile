@@ -24,7 +24,7 @@ RUN \
     ssh-client \
     sudo \
     zlib1g-dev; \
-  rm --recursive /var/lib/apt/lists/*
+  rm --recursive --verbose /var/lib/apt/lists/*
 
 # Create user.
 
@@ -38,7 +38,7 @@ RUN \
 
 USER "$USER_NAME"
 WORKDIR "/home/$USER_NAME"
-RUN mkdir --parents ~/.cabal/bin ~/.cache ~/.ghcup/bin ~/.local/bin
+RUN mkdir --parents --verbose ~/.cabal/bin ~/.cache ~/.ghcup/bin ~/.local/bin
 ENV PATH="/home/$USER_NAME/.cabal/bin:/home/$USER_NAME/.local/bin:/home/$USER_NAME/.ghcup/bin:$PATH"
 
 # Install GHCup.
@@ -48,7 +48,7 @@ RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHCUP_VERSION"; then \
   curl --output ~/.ghcup/bin/ghcup "https://downloads.haskell.org/~ghcup/$GHCUP_VERSION/$( uname --machine )-linux-ghcup-$GHCUP_VERSION"; \
-  chmod +x ~/.ghcup/bin/ghcup; \
+  chmod --verbose +x ~/.ghcup/bin/ghcup; \
   ghcup --version; \
   fi
 
@@ -100,9 +100,9 @@ ARG CABAL_STORE=/cabal-store
 RUN \
   set -o errexit -o xtrace; \
   if command -v cabal; then \
-  sudo mkdir --mode 0775 --parents "$CABAL_STORE"; \
-  sudo chown "$USER_NAME" "$CABAL_STORE"; \
-  sudo chgrp sudo "$CABAL_STORE"; \
+  sudo mkdir --mode 0775 --parents --verbose "$CABAL_STORE"; \
+  sudo chown --verbose "$USER_NAME" "$CABAL_STORE"; \
+  sudo chgrp --verbose sudo "$CABAL_STORE"; \
   cabal user-config init --augment "store-dir: $CABAL_STORE"; \
   fi
 
@@ -112,9 +112,9 @@ ARG STACK_ROOT=/stack-root
 RUN \
   set -o errexit -o xtrace; \
   if command -v stack; then \
-  sudo mkdir --mode 0775 --parents "$STACK_ROOT"; \
-  sudo chown "$USER_NAME" "$STACK_ROOT"; \
-  sudo chgrp sudo "$STACK_ROOT"; \
+  sudo mkdir --mode 0775 --parents --verbose "$STACK_ROOT"; \
+  sudo chown --verbose "$USER_NAME" "$STACK_ROOT"; \
+  sudo chgrp --verbose sudo "$STACK_ROOT"; \
   stack config set install-ghc --global false; \
   stack config set system-ghc --global true; \
   fi
