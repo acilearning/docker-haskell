@@ -46,64 +46,78 @@ ENV PATH="/home/$USER_NAME/.cabal/bin:/home/$USER_NAME/.local/bin:/home/$USER_NA
 ARG GHCUP_VERSION=0.1.18.0
 RUN \
   set -o errexit -o xtrace; \
+  if test -n "$GHCUP_VERSION"; then \
   curl --output ~/.ghcup/bin/ghcup "https://downloads.haskell.org/~ghcup/$GHCUP_VERSION/$( uname --machine )-linux-ghcup-$GHCUP_VERSION"; \
   chmod +x ~/.ghcup/bin/ghcup; \
-  ghcup --version
+  ghcup --version; \
+  fi
 
 # Install GHC.
 
 ARG GHC_VERSION=9.0.2
 RUN \
   set -o errexit -o xtrace; \
+  if test -n "$GHC_VERSION"; then \
   ghcup install ghc "$GHC_VERSION" --set; \
   ghcup gc --profiling-libs --share-dir; \
-  ghc --version
+  ghc --version; \
+  fi
 
 # Install Cabal.
 
 ARG CABAL_VERSION=3.6.2.0
 RUN \
   set -o errexit -o xtrace; \
+  if test -n "$CABAL_VERSION"; then \
   ghcup install cabal "$CABAL_VERSION" --set; \
-  cabal --version
+  cabal --version; \
+  fi
 
 # Install Stack.
 
 ARG STACK_VERSION=2.7.5
 RUN \
   set -o errexit -o xtrace; \
+  if test -n "$STACK_VERSION"; then \
   ghcup install stack "$STACK_VERSION" --set; \
-  stack --version
+  stack --version; \
+  fi
 
 # Install HLS.
 
 ARG HLS_VERSION=1.7.0.0
 RUN \
   set -o errexit -o xtrace; \
+  if test -n "$HLS_VERSION"; then \
   ghcup install hls "$HLS_VERSION" --set; \
   ghcup gc --hls-no-ghc; \
-  haskell-language-server-wrapper --version
+  haskell-language-server-wrapper --version; \
+  fi
 
 # Configure Cabal.
 
 ARG CABAL_STORE=/cabal-store
 RUN \
   set -o errexit -o xtrace; \
+  if command -v cabal; then \
   sudo mkdir --mode 0775 --parents "$CABAL_STORE"; \
   sudo chown "$USER_NAME" "$CABAL_STORE"; \
   sudo chgrp sudo "$CABAL_STORE"; \
-  cabal user-config init --augment "store-dir: $CABAL_STORE"
+  cabal user-config init --augment "store-dir: $CABAL_STORE"; \
+  fi
 
 # Configure Stack.
 
 ARG STACK_ROOT=/stack-root
 RUN \
   set -o errexit -o xtrace; \
+  if command -v stack; then \
   sudo mkdir --mode 0775 --parents "$STACK_ROOT"; \
   sudo chown "$USER_NAME" "$STACK_ROOT"; \
   sudo chgrp sudo "$STACK_ROOT"; \
   stack config set install-ghc --global false; \
-  stack config set system-ghc --global true
+  stack config set system-ghc --global true; \
+  fi
 ENV STACK_ROOT="$STACK_ROOT"
 
 # Configure volumes.
