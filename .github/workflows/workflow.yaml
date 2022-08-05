@@ -4,8 +4,9 @@ jobs:
   docker:
     strategy:
       matrix:
-        ghc:
-          - 9.0.2
+        include:
+          - { ghc: 9.0.2 }
+          - { ghc: 9.2.4, hls: '' }
     name: Docker with GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +28,9 @@ jobs:
           username: ${{ github.actor }}
       - uses: docker/build-push-action@v3
         with:
-          build-args: GHC_VERSION=${{ matrix.ghc }}
+          build-args: |
+            GHC_VERSION=${{ matrix.ghc }}
+            HLS_VERSION=${{ matrix.hls }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           labels: ${{ steps.meta.outputs.labels }}
