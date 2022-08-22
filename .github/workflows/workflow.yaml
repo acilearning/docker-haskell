@@ -7,7 +7,7 @@ jobs:
         include:
           - { ghc: 9.0.2, hls: 1.7.0.0 }
           - { ghc: 9.2.4, hls: '' }
-          - { ghc: 9.4.1, hls: '' }
+          - { ghc: 9.4.2, hls: '' }
     name: Docker with GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     steps:
