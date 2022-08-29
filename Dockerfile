@@ -54,7 +54,7 @@ RUN \
 
 # Install GHC.
 
-ARG GHC_VERSION=9.0.2
+ARG GHC_VERSION=9.2.4
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHC_VERSION"; then \
@@ -89,7 +89,7 @@ ARG HLS_VERSION=1.7.0.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
-  ghcup install hls "$HLS_VERSION" --set; \
+  ghcup compile hls -g 7760340e --ghc $GHC_VERSION -j4 --cabal-update; \
   ghcup gc --hls-no-ghc; \
   haskell-language-server-wrapper --version; \
   fi
