@@ -89,8 +89,8 @@ ARG HLS_VERSION=1.7.0.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
-  ghcup install hls "$HLS_VERSION" --set; \
-  ghcup gc --hls-no-ghc; \
+  ghcup compile hls --cabal-update --ghc "$GHC_VERSION" --git-ref "$HLS_VERSION"; \
+  rm --recursive /cabal-store/* ~/.cabal/logs ~/.cabal/packages; \
   haskell-language-server-wrapper --version; \
   fi
 
