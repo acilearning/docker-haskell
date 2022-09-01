@@ -3,11 +3,12 @@ on: push
 jobs:
   docker:
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - { ghc: 9.0.2, hls: 1.7.0.0 }
-          - { ghc: 9.2.4, hls: 7760340e999693d07fdbea49c9e20a3dd5458ad3 }
-          - { ghc: 9.4.2, hls: '' }
+          - { ghc: 9.0.2, hls: 830596ee212d4f2fbbc81bcf5d08574ae96947d3 }
+          - { ghc: 9.2.4, hls: 830596ee212d4f2fbbc81bcf5d08574ae96947d3 }
+          - { ghc: 9.4.2, hls: 830596ee212d4f2fbbc81bcf5d08574ae96947d3 }
     name: Docker with GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     steps:
