@@ -86,17 +86,8 @@ RUN \
 # Install HLS.
 
 ARG HLS_VERSION=1.7.0.0
-RUN \
-  set -o errexit -o xtrace; \
-  if [ "$GHC_VERSION" == "9.2.4"]; then \
-    if test -n "$HLS_VERSION"; then \
-    ghcup compile hls -g 7760340e --ghc $GHC_VERSION -j4 --cabal-update; \
-    else \
-      ghcup install hls "$HLS_VERSION" --set; \
-    fi \
-  ghcup gc --hls-no-ghc; \
-  haskell-language-server-wrapper --version; \
-  fi
+COPY install_hls.sh /
+RUN bash /install_hls.sh
 
 # Configure Cabal.
 
