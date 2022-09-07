@@ -83,12 +83,6 @@ RUN \
   stack --version; \
   fi
 
-# Install HLS.
-
-ARG HLS_VERSION=1.7.0.0
-COPY install_hls.sh /
-RUN bash /install_hls.sh
-
 # Configure Cabal.
 
 ARG CABAL_STORE=/cabal-store
@@ -100,6 +94,12 @@ RUN \
   sudo chgrp --verbose sudo "$CABAL_STORE"; \
   cabal user-config init --augment "store-dir: $CABAL_STORE"; \
   fi
+
+# Install HLS.
+
+ARG HLS_VERSION=1.7.0.0
+COPY install_hls.sh /
+RUN bash /install_hls.sh
 
 # Configure Stack.
 
