@@ -7,4 +7,3 @@ This Docker image provides a Haskell development environment with the following 
 - [Cabal](https://www.haskell.org/cabal/)
 - [Stack](https://docs.haskellstack.org/en/stable/README/)
 - [HLS](https://haskell-language-server.readthedocs.io/en/latest/)
-  - Note that HLS is not available for all versions of GHC.
