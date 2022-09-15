@@ -5,9 +5,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - { ghc: 9.0.2, hls: 1.7.0.0 }
-          - { ghc: 9.2.4, hls: '' }
-          - { ghc: 9.4.2, hls: '' }
+          - { ghc: 9.0.2 }
+          - { ghc: 9.2.4 }
+          - { ghc: 9.4.2 }
     name: Docker with GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +31,6 @@ jobs:
         with:
           build-args: |
             GHC_VERSION=${{ matrix.ghc }}
-            HLS_VERSION=${{ matrix.hls }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           labels: ${{ steps.meta.outputs.labels }}
