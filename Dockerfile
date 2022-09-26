@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=11.4
+ARG DEBIAN_VERSION=11.5
 FROM "debian:$DEBIAN_VERSION-slim"
 
 # Install dependencies.
@@ -47,7 +47,7 @@ ARG GHCUP_VERSION=0.1.18.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHCUP_VERSION"; then \
-  curl --output ~/.ghcup/bin/ghcup "https://downloads.haskell.org/~ghcup/$GHCUP_VERSION/$( uname --machine )-linux-ghcup-$GHCUP_VERSION"; \
+  curl --output ~/.ghcup/bin/ghcup "https://downloads.haskell.org/ghcup/$GHCUP_VERSION/$( uname --machine )-linux-ghcup-$GHCUP_VERSION"; \
   chmod --verbose +x ~/.ghcup/bin/ghcup; \
   ghcup --version; \
   fi
@@ -75,7 +75,7 @@ RUN \
 
 # Install Stack.
 
-ARG STACK_VERSION=2.7.5
+ARG STACK_VERSION=2.9.1
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$STACK_VERSION"; then \
