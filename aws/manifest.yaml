@@ -1,0 +1,20 @@
+version: 0.2
+env:
+  variables:
+    AWS_REGION: us-east-1
+    GHC_VERSION: 9.2.4
+phases:
+  build:
+    commands:
+
+      - server=public.ecr.aws/v6m6o3k4
+
+      - aws ecr-public get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$server"
+
+      - tag="$server/haskell:$GHC_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION"
+
+      - echo "$tag"
+
+      - docker manifest create "$tag" "$tag-amd64" "$tag-arm64"
+
+      - docker manifest push "$tag"
