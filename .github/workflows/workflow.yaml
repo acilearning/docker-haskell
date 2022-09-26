@@ -9,8 +9,10 @@ jobs:
           - 9.2.4
           - 9.4.2
         include:
-          - { environment: ARM_CONTAINER, image: aws/codebuild/amazonlinux2-aarch64-standard:2.0 }
-          - { environment: LINUX_CONTAINER, image: aws/codebuild/amazonlinux2-x86_64-standard:4.0 }
+          - environment: ARM_CONTAINER
+            image: 'aws/codebuild/amazonlinux2-aarch64-standard:2.0'
+          - environment: LINUX_CONTAINER
+            image: 'aws/codebuild/amazonlinux2-x86_64-standard:4.0'
     name: Docker with GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     steps:
