@@ -4,13 +4,13 @@ jobs:
   docker:
     strategy:
       matrix:
-        image:
-          - aws/codebuild/amazonlinux2-aarch64-standard:2.0
-          - aws/codebuild/amazonlinux2-x86_64-standard:4.0
         ghc:
           - 9.0.2
           - 9.2.4
           - 9.4.2
+        include:
+          - { environment: ARM_CONTAINER, image: aws/codebuild/amazonlinux2-aarch64-standard:2.0 }
+          - { environment: LINUX_CONTAINER, image: aws/codebuild/amazonlinux2-x86_64-standard:4.0 }
     name: Docker with GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     steps:
@@ -24,6 +24,8 @@ jobs:
       - uses: aws-actions/aws-codebuild-run-build@v1
         with:
           project-name: docker-haskell
+          environment-type-override: ${{ matrix.environment }}
           image-override: ${{ matrix.image }}
+          env-vars-for-codebuild: GHC_VERSION
         env:
           GHC_VERSION: ${{ matrix.ghc }}
