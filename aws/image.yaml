@@ -12,7 +12,7 @@ phases:
 
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 
-      - server=public.ecr.aws/v6m6o3k4
+      - server=public.ecr.aws/acilearning
 
       - aws ecr-public get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$server"
 
