@@ -88,8 +88,7 @@ RUN \
 ARG HLS_VERSION=1.8.0.0
 RUN \
   set -o errexit -o xtrace; \
-  if test -n "$HLS_VERSION"; then \
-  ghcup install hls "$HLS_VERSION" --set; \
+  if test -n "$HLS_VERSION" && "$GHC_VERSION" == "9.2.5"; then \
   ghcup compile hls -g 5d56aa70a84807d7659e72eacd4d91fee08dbdbb --ghc $GHC_VERSION --cabal-update --set; \
   ghcup gc --hls-no-ghc; \
   haskell-language-server-wrapper --version; \
