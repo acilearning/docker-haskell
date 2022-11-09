@@ -2,7 +2,7 @@ version: 0.2
 env:
   variables:
     AWS_REGION: us-east-1
-    GHC_VERSION: 9.2.4
+    GHC_VERSION: 9.2.5
 phases:
   build:
     commands:
