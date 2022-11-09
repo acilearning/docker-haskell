@@ -5,7 +5,7 @@ env:
     DOCKER_USERNAME: docker-hub-read-only:DOCKER_USERNAME
   variables:
     AWS_REGION: us-east-1
-    GHC_VERSION: 9.2.4
+    GHC_VERSION: 9.2.5
 phases:
   build:
     commands:
