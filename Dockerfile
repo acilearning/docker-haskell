@@ -90,7 +90,7 @@ RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
   ghcup install hls "$HLS_VERSION" --set; \
-  ghcup compile hls -j -g 5d56aa70a84807d7659e72eacd4d91fee08dbdbb --ghc $GHC_VERSION --cabal-update --set \
+  ghcup compile hls -g 5d56aa70a84807d7659e72eacd4d91fee08dbdbb --ghc $GHC_VERSION --cabal-update --set \
   ghcup gc --hls-no-ghc; \
   haskell-language-server-wrapper --version; \
   fi
