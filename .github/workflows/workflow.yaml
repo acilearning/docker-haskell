@@ -24,7 +24,7 @@ jobs:
         with:
           project-name: docker-haskell-${{ matrix.arch }}
           buildspec-override: aws/image.yaml
-          env-vars-for-codebuild: GHC_VERSION
+          env-vars-for-codebuild: GHC_VERSION,HLS_VERSION
         env:
           GHC_VERSION: ${{ matrix.ghc }}
           HLS_VERSION: ${{ matrix.hls }}
