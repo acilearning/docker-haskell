@@ -4,13 +4,13 @@ jobs:
   image:
     strategy:
       matrix:
-        arch:
-          - amd64
-          - arm64
         include:
-          - { ghc: 9.0.2, hls: 1.8.0.0 }
-          - { ghc: 9.2.5, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
-          - { ghc: 9.4.3, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
+          - { arch: amd64, ghc: 9.0.2, hls: 1.8.0.0 }
+          - { arch: arm64, ghc: 9.0.2, hls: 1.8.0.0 }
+          - { arch: amd64, ghc: 9.2.5, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
+          - { arch: arm64, ghc: 9.2.5, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
+          - { arch: amd64, ghc: 9.4.3, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
+          - { arch: arm64, ghc: 9.4.3, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
     runs-on: ubuntu-latest
     steps:
 
