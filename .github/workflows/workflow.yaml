@@ -7,10 +7,10 @@ jobs:
         arch:
           - amd64
           - arm64
-        ghc:
-          - 9.0.2
-          - 9.2.4
-          - 9.4.2
+        include:
+          - { ghc: 9.0.2, hls: 1.8.0.0 }
+          - { ghc: 9.2.5, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
+          - { ghc: 9.4.3, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
     runs-on: ubuntu-latest
     steps:
 
@@ -27,6 +27,7 @@ jobs:
           env-vars-for-codebuild: GHC_VERSION
         env:
           GHC_VERSION: ${{ matrix.ghc }}
+          HLS_VERSION: ${{ matrix.hls }}
 
   manifest:
     needs: image
@@ -34,8 +35,8 @@ jobs:
       matrix:
         ghc:
           - 9.0.2
-          - 9.2.4
-          - 9.4.2
+          - 9.2.5
+          - 9.4.3
     runs-on: ubuntu-latest
     steps:
 
