@@ -32,6 +32,8 @@ phases:
 
       - docker buildx create --use
 
+      - docker info
+
       - docker buildx build --build-arg GHC_VERSION="$GHC_VERSION" --build-arg HLS_VERSION="$HLS_VERSION" --platform=linux/amd64,linux/arm64 --tag "$tag" .
 
       - docker push "$tag"
