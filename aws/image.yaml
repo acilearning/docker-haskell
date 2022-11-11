@@ -24,8 +24,6 @@ phases:
 
       - echo "$tag"
 
-      - ls -l /usr/libexec/docker/cli-plugins
-
       - mkdir --parents ~/.docker/cli-plugins
 
       - curl --location --output ~/.docker/cli-plugins/docker-buildx 'https://github.com/docker/buildx/releases/download/v0.9.1/buildx-v0.9.1.linux-amd64'
