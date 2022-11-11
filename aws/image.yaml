@@ -26,11 +26,9 @@ phases:
 
       - echo "$tag"
 
-      - docker buildx create --name bob
+      - docker buildx create
 
       - docker buildx ls
-
-      - docker buildx use bob
 
       - docker buildx build --build-arg GHC_VERSION="$GHC_VERSION" --build-arg HLS_VERSION="$HLS_VERSION" --platform=linux/amd64,linux/arm64 --tag "$tag" .
 
