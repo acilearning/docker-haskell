@@ -116,7 +116,7 @@ RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
     if echo "$HLS_VERSION" | grep --extended-regexp --quiet '^[0-9a-f]{40}$'; then \
-      ghcup compile hls --cabal-update --ghc "$GHC_VERSION" --git-describe-version --git-ref "$HLS_VERSION" --verbose -- --ghc-options='+RTS -M2G -RTS'; \
+      ghcup --verbose compile hls --cabal-update --ghc "$GHC_VERSION" --git-describe-version --git-ref "$HLS_VERSION" -- --ghc-options='+RTS -M2G -RTS'; \
     else \
       ghcup install hls "$HLS_VERSION" --set; \
     fi; \
