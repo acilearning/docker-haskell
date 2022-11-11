@@ -3,6 +3,7 @@ on: push
 jobs:
   image:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - { arch: amd64, ghc: 9.0.2, hls: 1.8.0.0 }
