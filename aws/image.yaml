@@ -16,6 +16,8 @@ phases:
 
       - docker version
 
+      - docker info
+
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 
       - server=public.ecr.aws/acilearning
@@ -25,6 +27,12 @@ phases:
       - tag="$server/haskell:$GHC_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION"
 
       - echo "$tag"
+
+      - mkdir --parents ~/.docker/cli-plugins
+
+      - curl --location --output ~/.docker/cli-plugins/docker-buildx 'https://github.com/docker/buildx/releases/download/v0.9.1/buildx-v0.9.1.linux-amd64'
+
+      - chmod +x ~/.docker/cli-plugins/docker-buildx
 
       - docker buildx create
 
