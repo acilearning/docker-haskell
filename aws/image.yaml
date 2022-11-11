@@ -19,14 +19,12 @@ phases:
 
       - aws ecr-public get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$server"
 
-      - case $( uname -m ) in ( aarch64 ) arch=arm64 ;; ( x86_64 ) arch=amd64 ;; ( * ) exit 1 ;; esac
-
-      - echo "$arch"
-
-      - tag="$server/haskell:$GHC_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch"
+      - tag="$server/haskell:$GHC_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION"
 
       - echo "$tag"
 
-      - docker build --build-arg GHC_VERSION="$GHC_VERSION" --build-arg HLS_VERSION="$HLS_VERSION" --tag "$tag" .
+      - docker buildx create --use
+
+      - docker buildx build --build-arg GHC_VERSION="$GHC_VERSION" --build-arg HLS_VERSION="$HLS_VERSION" --platform=linux/amd64,linux/arm64 --tag "$tag" .
 
       - docker push "$tag"
