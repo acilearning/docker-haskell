@@ -120,7 +120,8 @@ RUN \
     else \
       ghcup install hls "$HLS_VERSION" --set; \
     fi; \
-    ghcup gc --hls-no-ghc; \
+    ghcup gc --cache --hls-no-ghc --tmpdirs; \
+    rm --force --recursive --verbose /cabal-store/* ~/.cabal/{logs,packages,store}; \
     haskell-language-server-wrapper --version; \
   fi
 
