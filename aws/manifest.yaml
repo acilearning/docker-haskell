@@ -2,8 +2,8 @@ version: 0.2
 env:
   variables:
     AWS_REGION: us-east-1
-    # This value is simply the default. It is typically overriden by the
-    # workflow in `.github/workflows/workflow.yaml`.
+    # These values are simply the defaults. They are typically overriden by
+    # the workflow in `.github/workflows/workflow.yaml`.
     GHC_VERSION: 9.0.2
     LATEST: 'false'
 phases:
