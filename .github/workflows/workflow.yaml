@@ -51,6 +51,7 @@ jobs:
         with:
           project-name: docker-haskell-amd64
           buildspec-override: aws/manifest.yaml
-          env-vars-for-codebuild: GHC_VERSION
+          env-vars-for-codebuild: GHC_VERSION,LATEST
         env:
           GHC_VERSION: ${{ matrix.ghc }}
+          LATEST: ${{ (github.ref == 'refs/heads/main' && '1') || '' }}
