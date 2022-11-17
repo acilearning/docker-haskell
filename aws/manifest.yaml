@@ -22,7 +22,7 @@ phases:
 
       - docker manifest push "$tag"
 
-      - if test -z "$LATEST"; exit 0; fi
+      - if test -z "$LATEST"; then exit 0; fi
 
       - latest="$server/haskell:$GHC_VERSION"
 
