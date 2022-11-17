@@ -22,12 +22,9 @@ phases:
 
       - docker manifest push "$tag"
 
-      - if test "$LATEST" != 'true'; then exit 0; fi
-
-      - latest="$server/haskell:$GHC_VERSION"
-
-      - echo "$latest"
-
-      - docker manifest create "$latest" "$tag-amd64" "$tag-arm64"
-
-      - docker manifest push "$latest"
+      - if test "$LATEST" = 'true';
+        then latest="$server/haskell:$GHC_VERSION";
+        echo "$latest";
+        docker manifest create "$latest" "$tag-amd64" "$tag-arm64";
+        docker manifest push "$latest";
+        fi
