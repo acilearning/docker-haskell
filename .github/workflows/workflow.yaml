@@ -54,4 +54,4 @@ jobs:
           env-vars-for-codebuild: GHC_VERSION,LATEST
         env:
           GHC_VERSION: ${{ matrix.ghc }}
-          LATEST: ${{ (github.ref == 'refs/heads/main' && '1') || '' }}
+          LATEST: ${{ github.ref == 'refs/heads/main' }}

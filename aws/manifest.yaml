@@ -5,7 +5,7 @@ env:
     # This value is simply the default. It is typically overriden by the
     # workflow in `.github/workflows/workflow.yaml`.
     GHC_VERSION: 9.0.2
-    LATEST: ''
+    LATEST: 'false'
 phases:
   build:
     commands:
@@ -22,7 +22,7 @@ phases:
 
       - docker manifest push "$tag"
 
-      - if test -z "$LATEST"; then exit 0; fi
+      - if test "$LATEST" != 'true'; then exit 0; fi
 
       - latest="$server/haskell:$GHC_VERSION"
 
