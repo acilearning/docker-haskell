@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=11.5
+ARG DEBIAN_VERSION=11.6
 FROM "debian:$DEBIAN_VERSION-slim"
 
 # Install dependencies.
