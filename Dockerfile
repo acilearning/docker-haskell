@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=11.5
+ARG DEBIAN_VERSION=11.6
 FROM "debian:$DEBIAN_VERSION-slim"
 
 # Install dependencies.
@@ -87,7 +87,7 @@ RUN \
 
 # Install Stack.
 
-ARG STACK_VERSION=2.9.1
+ARG STACK_VERSION=2.9.3
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$STACK_VERSION"; then \
