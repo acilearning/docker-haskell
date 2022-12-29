@@ -6,12 +6,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { arch: amd64, ghc: 9.0.2, hls: 1.8.0.0 }
-          - { arch: arm64, ghc: 9.0.2, hls: 1.8.0.0 }
-          - { arch: amd64, ghc: 9.2.5, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
-          - { arch: arm64, ghc: 9.2.5, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
-          - { arch: amd64, ghc: 9.4.3, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
-          - { arch: arm64, ghc: 9.4.3, hls: 85f788135175a007d3db4ac911c4115b30ab9d87 }
+          - { arch: amd64, ghc: 9.0.2, hls: 1.9.0.0 }
+          - { arch: arm64, ghc: 9.0.2, hls: 1.9.0.0 }
+          - { arch: amd64, ghc: 9.2.5, hls: 1.9.0.0 }
+          - { arch: arm64, ghc: 9.2.5, hls: 1.9.0.0 }
+          - { arch: amd64, ghc: 9.4.3, hls: 1.9.0.0 }
+          - { arch: arm64, ghc: 9.4.3, hls: 1.9.0.0 }
     runs-on: ubuntu-latest
     steps:
 
