@@ -40,6 +40,7 @@ jobs:
           - 9.0.2
           - 9.2.5
           - 9.4.4
+          - 9.6.0.20230111
     runs-on: ubuntu-latest
     steps:
 
