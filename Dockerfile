@@ -50,7 +50,7 @@ RUN \
     curl --output ~/.ghcup/bin/ghcup "https://downloads.haskell.org/ghcup/$GHCUP_VERSION/$( uname --machine )-linux-ghcup-$GHCUP_VERSION"; \
     chmod --verbose +x ~/.ghcup/bin/ghcup; \
     ghcup --version; \
-    ghcup config add-release-channel https://raw.githubusercontent.com/haskell/ghcup-metadata/master/ghcup-prereleases-0.0.7.yaml; \
+    ghcup config add-release-channel https://gist.githubusercontent.com/mpickering/b0b86998d1fc94711294edd0127ae16f/raw/862357134ea4b4bbc4b55f34889af7b2f610e35f/metadata_test.yaml; \
   fi
 
 # Install GHC.
