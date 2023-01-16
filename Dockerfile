@@ -43,7 +43,7 @@ ENV PATH="/home/$USER_NAME/.local/bin:/home/$USER_NAME/.cabal/bin:/home/$USER_NA
 
 # Install GHCup.
 
-ARG GHCUP_VERSION=0.1.18.0
+ARG GHCUP_VERSION=0.1.19.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHCUP_VERSION"; then \
