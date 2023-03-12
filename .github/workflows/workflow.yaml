@@ -12,6 +12,8 @@ jobs:
           - { arch: arm64, ghc: 9.2.6, hls: 1.9.1.0 }
           - { arch: amd64, ghc: 9.4.4, hls: 1.9.1.0 }
           - { arch: arm64, ghc: 9.4.4, hls: 1.9.1.0 }
+          - { arch: amd64, ghc: 9.6.1, hls: '' }
+          - { arch: arm64, ghc: 9.6.1, hls: '' }
     runs-on: ubuntu-latest
     steps:
 
