@@ -6,8 +6,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { arch: amd64, ghc: 9.0.2, hls: 1.9.1.0 }
-          - { arch: arm64, ghc: 9.0.2, hls: 1.9.1.0 }
           - { arch: amd64, ghc: 9.2.7, hls: '' }
           - { arch: arm64, ghc: 9.2.7, hls: '' }
           - { arch: amd64, ghc: 9.4.4, hls: 1.9.1.0 }
