@@ -67,7 +67,7 @@ RUN \
     ghcup install stack "$STACK_VERSION" --set; \
     stack --version; \
     stack config set install-ghc --global false; \
-    stack config set system-ghc --global false; \
+    stack config set system-ghc --global true; \
   fi
 
 # Install HLS.
