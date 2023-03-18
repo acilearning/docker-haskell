@@ -54,7 +54,7 @@ RUN \
   if test -n "$CABAL_VERSION"; then \
     ghcup install cabal "$CABAL_VERSION" --set; \
     cabal --version; \
-    cabal user-config --init; \
+    cabal user-config init; \
   fi
 
 # Install Stack.
