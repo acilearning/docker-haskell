@@ -20,7 +20,11 @@ RUN \
 ARG USER_NAME=vscode
 USER "$USER_NAME"
 WORKDIR "/home/$USER_NAME"
-RUN mkdir --parents --verbose ~/.local/bin
+RUN mkdir --parents --verbose \
+  ~/.cache/cabal \
+  ~/.local/bin \
+  ~/.local/share/stack \
+  ~/.local/state/cabal
 ENV PATH="/home/$USER_NAME/.local/bin:$PATH"
 
 # Install GHCup.
