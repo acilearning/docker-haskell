@@ -12,7 +12,8 @@ RUN \
     libgmp-dev \
     liblzma-dev \
     libnuma-dev \
-    libpq-dev; \
+    libpq-dev \
+    libtinfo-dev; \
   rm --recursive --verbose /var/lib/apt/lists/*
 
 # Configure user.
