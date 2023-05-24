@@ -8,8 +8,8 @@ jobs:
         include:
           - { arch: amd64, ghc: 9.2.7, hls: 2.0.0.0 }
           - { arch: arm64, ghc: 9.2.7, hls: 2.0.0.0 }
-          - { arch: amd64, ghc: 9.4.4, hls: 2.0.0.0 }
-          - { arch: arm64, ghc: 9.4.4, hls: 2.0.0.0 }
+          - { arch: amd64, ghc: 9.4.5, hls: 2.0.0.0 }
+          - { arch: arm64, ghc: 9.4.5, hls: 2.0.0.0 }
           - { arch: amd64, ghc: 9.6.1, hls: 2.0.0.0 }
           - { arch: arm64, ghc: 9.6.1, hls: 2.0.0.0 }
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
       matrix:
         ghc:
           - 9.2.7
-          - 9.4.4
+          - 9.4.5
           - 9.6.1
     runs-on: ubuntu-latest
     steps:

@@ -42,7 +42,7 @@ RUN \
 
 # Install GHC.
 
-ARG GHC_VERSION=9.4.4
+ARG GHC_VERSION=9.4.5
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHC_VERSION"; then \
