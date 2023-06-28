@@ -9,7 +9,7 @@ jobs:
             - amd64
             - arm64
           ghc:
-            - 9.2.7
+            - 9.2.8
             - 9.4.5
             - 9.6.1
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
     strategy:
       matrix:
         ghc:
-          - 9.2.7
+          - 9.2.8
           - 9.4.5
           - 9.6.1
     runs-on: ubuntu-latest
