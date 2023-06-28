@@ -5,13 +5,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          arch:
-            - amd64
-            - arm64
-          ghc:
-            - 9.2.8
-            - 9.4.5
-            - 9.6.2
+        include:
+          - { arch: amd64, ghc: 9.2.8, hls: 2.0.0.1 }
+          - { arch: amd64, ghc: 9.4.5, hls: 2.0.0.1 }
+          - { arch: amd64, ghc: 9.6.2, hls: 2.0.0.1 }
+          - { arch: arm64, ghc: 9.2.8, hls: 2.0.0.1 }
+          - { arch: arm64, ghc: 9.4.5, hls: 2.0.0.0 }
+          - { arch: arm64, ghc: 9.6.2, hls: 2.0.0.1 }
     runs-on: ubuntu-latest
     steps:
 
@@ -25,9 +25,10 @@ jobs:
         with:
           project-name: docker-haskell-${{ matrix.arch }}
           buildspec-override: aws/image.yaml
-          env-vars-for-codebuild: GHC_VERSION
+          env-vars-for-codebuild: GHC_VERSION,HLS_VERSION
         env:
           GHC_VERSION: ${{ matrix.ghc }}
+          HLS_VERSION: ${{ matrix.hls }}
 
   manifest:
     needs: image
