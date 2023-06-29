@@ -30,7 +30,7 @@ ENV PATH="/home/$USER_NAME/.local/bin:$PATH"
 
 # Install GHCup.
 
-ARG GHCUP_VERSION=0.1.19.2
+ARG GHCUP_VERSION=0.1.19.3
 ENV GHCUP_USE_XDG_DIRS=1
 RUN \
   set -o errexit -o xtrace; \
