@@ -13,7 +13,8 @@ RUN \
     liblzma-dev \
     libnuma-dev \
     libpq-dev \
-    libtinfo-dev; \
+    libtinfo-dev \
+    pkg-config; \
   rm --recursive --verbose /var/lib/apt/lists/*
 
 # Configure user.
