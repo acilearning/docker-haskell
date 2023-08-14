@@ -78,7 +78,7 @@ RUN \
 
 # Install HLS.
 
-ARG HLS_VERSION=2.0.0.1
+ARG HLS_VERSION=2.1.0.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \

@@ -8,7 +8,7 @@ env:
     # These values are simply the defaults. They are typically overriden by the
     # workflow in `.github/workflows/workflow.yaml`.
     GHC_VERSION: 9.6.2
-    HLS_VERSION: 2.0.0.1
+    HLS_VERSION: 2.1.0.0
 phases:
   build:
     commands:
