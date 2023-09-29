@@ -31,7 +31,7 @@ ENV PATH="/home/$USER_NAME/.local/bin:$PATH"
 
 # Install GHCup.
 
-ARG GHCUP_VERSION=0.1.19.3
+ARG GHCUP_VERSION=0.1.19.4
 ENV GHCUP_USE_XDG_DIRS=1
 RUN \
   set -o errexit -o xtrace; \
@@ -43,7 +43,7 @@ RUN \
 
 # Install GHC.
 
-ARG GHC_VERSION=9.6.2
+ARG GHC_VERSION=9.6.3
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHC_VERSION"; then \
@@ -78,15 +78,11 @@ RUN \
 
 # Install HLS.
 
-ARG HLS_VERSION=2.2.0.0
+ARG HLS_VERSION=2.3.0.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
-    if echo "$HLS_VERSION" | grep --extended-regexp --quiet '^[0-9a-f]{40}$'; then \
-      ghcup --verbose compile hls --cabal-update --ghc "$GHC_VERSION" --git-describe-version --git-ref "$HLS_VERSION" -- --flags=-dynamic --ghc-options='+RTS -M2G -RTS' --index-state='2022-11-11T21:44:45Z'; \
-    else \
-      ghcup install hls "$HLS_VERSION" --set; \
-    fi; \
+    ghcup install hls "$HLS_VERSION" --set; \
     ghcup gc --hls-no-ghc --tmpdirs; \
     rm --force --recursive --verbose "$CABAL_STORE/*" ~/.cabal/{logs,packages,store}; \
     haskell-language-server-wrapper --version; \

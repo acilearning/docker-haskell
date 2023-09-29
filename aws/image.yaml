@@ -7,8 +7,7 @@ env:
     AWS_REGION: us-east-1
     # These values are simply the defaults. They are typically overriden by the
     # workflow in `.github/workflows/workflow.yaml`.
-    GHC_VERSION: 9.6.2
-    HLS_VERSION: 2.2.0.0
+    GHC_VERSION: 9.6.3
 phases:
   build:
     commands:
@@ -27,6 +26,6 @@ phases:
 
       - echo "$tag"
 
-      - docker build --build-arg GHC_VERSION="$GHC_VERSION" --build-arg HLS_VERSION="$HLS_VERSION" --tag "$tag" .
+      - docker build --build-arg GHC_VERSION="$GHC_VERSION" --tag "$tag" .
 
       - docker push "$tag"
