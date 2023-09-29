@@ -82,11 +82,7 @@ ARG HLS_VERSION=2.3.0.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
-    if echo "$HLS_VERSION" | grep --extended-regexp --quiet '^[0-9a-f]{40}$'; then \
-      ghcup --verbose compile hls --cabal-update --ghc "$GHC_VERSION" --git-describe-version --git-ref "$HLS_VERSION" -- --flags=-dynamic --ghc-options='+RTS -M2G -RTS' --index-state='2022-11-11T21:44:45Z'; \
-    else \
-      ghcup install hls "$HLS_VERSION" --set; \
-    fi; \
+    ghcup install hls "$HLS_VERSION" --set; \
     ghcup gc --hls-no-ghc --tmpdirs; \
     rm --force --recursive --verbose "$CABAL_STORE/*" ~/.cabal/{logs,packages,store}; \
     haskell-language-server-wrapper --version; \
