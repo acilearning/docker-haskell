@@ -65,7 +65,7 @@ RUN \
 
 # Install Stack.
 
-ARG STACK_VERSION=2.11.1
+ARG STACK_VERSION=2.13.1
 ENV STACK_XDG=1
 RUN \
   set -o errexit -o xtrace; \
