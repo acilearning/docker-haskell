@@ -5,5 +5,5 @@ This Docker image provides a Haskell development environment with the following 
 - [GHCup](https://www.haskell.org/ghcup/)
 - [GHC](https://www.haskell.org/ghc/)
 - [Cabal](https://www.haskell.org/cabal/)
-- [Stack](https://docs.haskellstack.org/en/stable/README/)
+- [Stack](https://docs.haskellstack.org/en/stable/)
 - [HLS](https://haskell-language-server.readthedocs.io/en/latest/)
