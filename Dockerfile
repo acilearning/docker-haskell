@@ -1,4 +1,4 @@
-ARG DEBIAN_VERSION=11
+ARG DEBIAN_VERSION=12
 FROM "mcr.microsoft.com/devcontainers/base:debian-$DEBIAN_VERSION"
 
 # Install dependencies.
