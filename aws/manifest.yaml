@@ -4,7 +4,7 @@ env:
     AWS_REGION: us-east-1
     # These values are simply the defaults. They are typically overriden by
     # the workflow in `.github/workflows/workflow.yaml`.
-    GHC_VERSION: 9.6.3
+    GHC_VERSION: 9.8.1
     LATEST: 'false'
 phases:
   build:

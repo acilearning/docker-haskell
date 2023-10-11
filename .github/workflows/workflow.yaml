@@ -6,12 +6,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { arch: amd64, ghc: 9.2.8 }
           - { arch: amd64, ghc: 9.4.7 }
           - { arch: amd64, ghc: 9.6.3 }
-          - { arch: arm64, ghc: 9.2.8 }
+          - { arch: amd64, ghc: 9.8.1 }
           - { arch: arm64, ghc: 9.4.7 }
           - { arch: arm64, ghc: 9.6.3 }
+          - { arch: arm64, ghc: 9.8.1 }
     runs-on: ubuntu-latest
     steps:
 
@@ -34,9 +34,9 @@ jobs:
     strategy:
       matrix:
         ghc:
-          - 9.2.8
           - 9.4.7
           - 9.6.3
+          - 9.8.1
     runs-on: ubuntu-latest
     steps:
 

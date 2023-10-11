@@ -43,7 +43,7 @@ RUN \
 
 # Install GHC.
 
-ARG GHC_VERSION=9.6.3
+ARG GHC_VERSION=9.8.1
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHC_VERSION"; then \
@@ -78,7 +78,7 @@ RUN \
 
 # Install HLS.
 
-ARG HLS_VERSION=2.3.0.0
+ARG HLS_VERSION=2.4.0.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
