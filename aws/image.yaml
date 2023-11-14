@@ -1,31 +1,28 @@
-version: 0.2
-env:
-  secrets-manager:
-    DOCKER_PASSWORD: docker-hub-read-only:DOCKER_PASSWORD
-    DOCKER_USERNAME: docker-hub-read-only:DOCKER_USERNAME
-  variables:
-    AWS_REGION: us-east-1
-    # These values are simply the defaults. They are typically overriden by the
-    # workflow in `.github/workflows/workflow.yaml`.
-    GHC_VERSION: 9.8.1
-phases:
-  build:
-    commands:
-
-      - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-
-      - server=public.ecr.aws/acilearning
-
-      - aws ecr-public get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$server"
-
-      - case $( uname -m ) in ( aarch64 ) arch=arm64 ;; ( x86_64 ) arch=amd64 ;; ( * ) exit 1 ;; esac
-
-      - echo "$arch"
-
-      - tag="$server/haskell:$GHC_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch"
-
-      - echo "$tag"
-
-      - docker build --build-arg GHC_VERSION="$GHC_VERSION" --tag "$tag" .
-
-      - docker push "$tag"
+{
+  "env": {
+    "secrets-manager": {
+      "DOCKER_PASSWORD": "docker-hub-read-only:DOCKER_PASSWORD",
+      "DOCKER_USERNAME": "docker-hub-read-only:DOCKER_USERNAME"
+    },
+    "variables": {
+      "AWS_REGION": "us-east-1",
+      "GHC_VERSION": "9.8.1"
+    }
+  },
+  "phases": {
+    "build": {
+      "commands": [
+        "echo \"$DOCKER_PASSWORD\" | docker login --username \"$DOCKER_USERNAME\" --password-stdin",
+        "server=public.ecr.aws/acilearning",
+        "aws ecr-public get-login-password --region \"$AWS_REGION\" | docker login --username AWS --password-stdin \"$server\"",
+        "case $( uname -m ) in ( aarch64 ) arch=arm64 ;; ( x86_64 ) arch=amd64 ;; ( * ) exit 1 ;; esac",
+        "echo \"$arch\"",
+        "tag=\"$server/haskell:$GHC_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch\"",
+        "echo \"$tag\"",
+        "docker build --build-arg GHC_VERSION=\"$GHC_VERSION\" --tag \"$tag\" .",
+        "docker push \"$tag\""
+      ]
+    }
+  },
+  "version": 0.2
+}
