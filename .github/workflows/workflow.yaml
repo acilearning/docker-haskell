@@ -1,56 +1,96 @@
-name: Workflow
-on: push
-jobs:
-  image:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { arch: amd64, ghc: 9.4.7 }
-          - { arch: amd64, ghc: 9.6.3 }
-          - { arch: amd64, ghc: 9.8.1 }
-          - { arch: arm64, ghc: 9.4.7 }
-          - { arch: arm64, ghc: 9.6.3 }
-          - { arch: arm64, ghc: 9.8.1 }
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - uses: aws-actions/aws-codebuild-run-build@v1
-        with:
-          project-name: docker-haskell-${{ matrix.arch }}
-          buildspec-override: aws/image.yaml
-          env-vars-for-codebuild: GHC_VERSION
-        env:
-          GHC_VERSION: ${{ matrix.ghc }}
-
-  manifest:
-    needs: image
-    strategy:
-      matrix:
-        ghc:
-          - 9.4.7
-          - 9.6.3
-          - 9.8.1
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - uses: aws-actions/aws-codebuild-run-build@v1
-        with:
-          project-name: docker-haskell-amd64
-          buildspec-override: aws/manifest.yaml
-          env-vars-for-codebuild: GHC_VERSION,LATEST
-        env:
-          GHC_VERSION: ${{ matrix.ghc }}
-          LATEST: ${{ github.ref == 'refs/heads/main' }}
+{
+  "name": "Workflow",
+  "on": "push",
+  "jobs": {
+    "image": {
+      "strategy": {
+        "fail-fast": false,
+        "matrix": {
+          "include": [
+            {
+              "arch": "amd64",
+              "ghc": "9.4.7"
+            },
+            {
+              "arch": "amd64",
+              "ghc": "9.6.3"
+            },
+            {
+              "arch": "amd64",
+              "ghc": "9.8.1"
+            },
+            {
+              "arch": "arm64",
+              "ghc": "9.4.7"
+            },
+            {
+              "arch": "arm64",
+              "ghc": "9.6.3"
+            },
+            {
+              "arch": "arm64",
+              "ghc": "9.8.1"
+            }
+          ]
+        }
+      },
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "uses": "aws-actions/configure-aws-credentials@v4",
+          "with": {
+            "aws-access-key-id": "${{ secrets.AWS_ACCESS_KEY_ID }}",
+            "aws-region": "${{ secrets.AWS_DEFAULT_REGION }}",
+            "aws-secret-access-key": "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          }
+        },
+        {
+          "uses": "aws-actions/aws-codebuild-run-build@v1",
+          "with": {
+            "project-name": "docker-haskell-${{ matrix.arch }}",
+            "buildspec-override": "aws/image.yaml",
+            "env-vars-for-codebuild": "GHC_VERSION"
+          },
+          "env": {
+            "GHC_VERSION": "${{ matrix.ghc }}"
+          }
+        }
+      ]
+    },
+    "manifest": {
+      "needs": "image",
+      "strategy": {
+        "matrix": {
+          "ghc": [
+            "9.4.7",
+            "9.6.3",
+            "9.8.1"
+          ]
+        }
+      },
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "uses": "aws-actions/configure-aws-credentials@v4",
+          "with": {
+            "aws-access-key-id": "${{ secrets.AWS_ACCESS_KEY_ID }}",
+            "aws-region": "${{ secrets.AWS_DEFAULT_REGION }}",
+            "aws-secret-access-key": "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          }
+        },
+        {
+          "uses": "aws-actions/aws-codebuild-run-build@v1",
+          "with": {
+            "project-name": "docker-haskell-amd64",
+            "buildspec-override": "aws/manifest.yaml",
+            "env-vars-for-codebuild": "GHC_VERSION,LATEST"
+          },
+          "env": {
+            "GHC_VERSION": "${{ matrix.ghc }}",
+            "LATEST": "${{ github.ref == 'refs/heads/main' }}"
+          }
+        }
+      ]
+    }
+  }
+}
