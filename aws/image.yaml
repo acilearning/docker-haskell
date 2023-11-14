@@ -1,5 +1,4 @@
 {
-  "version": 0.2,
   "env": {
     "secrets-manager": {
       "DOCKER_PASSWORD": "docker-hub-read-only:DOCKER_PASSWORD",
@@ -24,5 +23,6 @@
         "docker push \"$tag\""
       ]
     }
-  }
+  },
+  "version": 0.2
 }
