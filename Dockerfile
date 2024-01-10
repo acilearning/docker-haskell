@@ -54,7 +54,7 @@ RUN \
 
 # Install Cabal.
 
-ARG CABAL_VERSION=3.10.2.0
+ARG CABAL_VERSION=3.10.2.1
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$CABAL_VERSION"; then \
