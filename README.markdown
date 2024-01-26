@@ -45,7 +45,7 @@ And the corresponding `compose.yaml` file:
 services:
   devcontainer:
     command: sleep infinity
-    image: public.ecr.aws/acilearning/haskell:9.8.1-3a8c34f81332de06c4c2239e144a63dfd11de9f0
+    image: public.ecr.aws/acilearning/haskell:9.8.1
     init: true
     volumes: [ .:/workspace ]
     working_dir: /workspace
