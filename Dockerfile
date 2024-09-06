@@ -54,10 +54,7 @@ RUN \
 
 # Install Cabal.
 
-# consider tyring to update to 3.12.1.0, can we upgrade that far? it's just a user app right?
-# maybe Cabal is builtin?
-
-ARG CABAL_VERSION=3.10.2.1
+ARG CABAL_VERSION=3.12.1.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$CABAL_VERSION"; then \
