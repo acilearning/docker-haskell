@@ -2,7 +2,7 @@
   "env": {
     "variables": {
       "AWS_REGION": "us-east-1",
-      "GHC_VERSION": "9.8.1",
+      "GHC_VERSION": "9.8.2",
       "LATEST": "false"
     }
   },

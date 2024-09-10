@@ -31,7 +31,7 @@ ENV PATH="/home/$USER_NAME/.local/bin:$PATH"
 
 # Install GHCup.
 
-ARG GHCUP_VERSION=0.1.20.0
+ARG GHCUP_VERSION=0.1.30.0
 ENV GHCUP_USE_XDG_DIRS=1
 RUN \
   set -o errexit -o xtrace; \
@@ -43,7 +43,7 @@ RUN \
 
 # Install GHC.
 
-ARG GHC_VERSION=9.8.1
+ARG GHC_VERSION=9.8.2
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$GHC_VERSION"; then \
@@ -54,7 +54,7 @@ RUN \
 
 # Install Cabal.
 
-ARG CABAL_VERSION=3.10.2.1
+ARG CABAL_VERSION=3.12.1.0
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$CABAL_VERSION"; then \
@@ -78,7 +78,7 @@ RUN \
 
 # Install HLS.
 
-ARG HLS_VERSION=2.6.0.0
+ARG HLS_VERSION=2.9.0.1
 RUN \
   set -o errexit -o xtrace; \
   if test -n "$HLS_VERSION"; then \
